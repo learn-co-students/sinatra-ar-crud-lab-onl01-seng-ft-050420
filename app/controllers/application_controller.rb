@@ -21,16 +21,32 @@ class ApplicationController < Sinatra::Base
   
   get '/articles/:id' do
     id = params[:id]
-    article = Article.find(id)
-    @articles = []
-    @articles << article
+    @article = Article.find(id)
     erb :show
   end
   
   get '/articles' do
-    @articles = []
-    @articles = Acticle.all
-    erb :show
+    @articles = Article.all
+    erb :index
+  end
+  
+  get '/articles/:id/edit' do
+    id = params[:id]
+    @article = Article.find(id)
+    erb :edit
+  end
+  
+  patch "/articles/:id" do
+    id = params[:id]
+    @article = Article.find(id)
+    @article.update(title: params[:title])
+    @article.update(content: params[:content])
+    redirect to "/articles/#{@article.id}"
+  end
+  
+  delete '/articles/:id' do
+    id = params[:id]
+    Article.delete(params[:id])
   end
   
 end
