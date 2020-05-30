@@ -28,10 +28,13 @@ describe "Magazine App" do
 
       fill_in :title, :with => "an article"
       fill_in :content, :with => "content content content content content"
-
+      
       page.find(:css, "[type=submit]").click
 
       expect(page.current_path).to eq("/articles/#{Article.last.id}")
+      
+      puts page.body
+      
       expect(page.body).to include("content content content content content")
     end
 
