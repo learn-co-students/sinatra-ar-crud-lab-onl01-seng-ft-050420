@@ -33,8 +33,6 @@ describe "Magazine App" do
 
       expect(page.current_path).to eq("/articles/#{Article.last.id}")
       
-      puts page.body
-      
       expect(page.body).to include("content content content content content")
     end
 
