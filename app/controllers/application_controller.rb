@@ -8,6 +8,42 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
   end
 
-  get '/' do
+  get '/articles' do
+    @articles = Article.all
+    erb :index
+  end
+
+  get '/articles/new' do 
+    erb :new
+  end
+
+  get '/articles/:id' do 
+    @article = Article.find_by(params)
+    erb :show
+  end
+
+  post '/articles' do 
+    Article.create(params)
+    redirect to "/articles/#{Article.all[-1].id}"
+    
+  end
+
+  get '/articles/:id/edit' do 
+    @article = Article.find_by(params)
+    erb :edit
+  end
+
+  patch '/articles/:id' do
+    article = Article.find_by(id: params[:id])
+    article.update(params[:article])
+    redirect to "articles/#{params[:id]}"
+  end
+
+  delete '/articles/:id' do 
+
+    article = Article.find_by(id: params[:id])
+    # binding.pry
+    article.destroy
+    redirect to "/articles"
   end
 end
