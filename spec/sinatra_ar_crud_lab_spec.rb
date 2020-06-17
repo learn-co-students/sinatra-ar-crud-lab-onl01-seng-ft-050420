@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe "Magazine App" do
-  let(:article_title) { "Hello World!!!!" }
-  let(:article_content) { "This is my first article!!!" }
+  let(:article_title) { "Hello World" }
+  let(:article_content) { "This is my first article" }
 
   before do
     @article1 = Article.create(:title => article_title, :content => article_content)
